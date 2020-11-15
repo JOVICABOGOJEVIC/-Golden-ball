@@ -1,0 +1,9 @@
+.img-fluid{
+    height:220px;
+    width:400px;
+    padding:2%;
+    border:1px solid grey;
+}
+body{
+    font-family: 'Kanit', sans-serif;
+}

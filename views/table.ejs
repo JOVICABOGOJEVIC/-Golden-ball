@@ -1,0 +1,73 @@
+<%- include ('partials/top') %>
+<div class="jumbotron text-center">
+  <h6>Dobitnici "Zlatne lopte" od 2000. godine</h6>
+  <h3>Glasaj za najboljeg..</h3>
+  <a href="/" class="btn btn-lg float-right">Naslovna</a>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Ime fudbalera</th>
+            <th scope="col">Broj glasova</th>
+          </tr>
+        </thead>
+        <%  var promena = 0; 
+if (data.length > 1) { 
+  var k = data.length - 1; 
+ while ((promena == 0) && (k >= 0)) { 
+   promena = 1;
+   for(let j = 0; j < k; j++) {
+       if (data[j].visited < data[j + 1].visited) {
+         promena = 0;
+         var tmpName = data[j].name;
+         var tmpVisited = data[j].visited;
+         var tmpId = data[j].id;
+         var tmpIgrac = data[j].igrac;
+         var tmpImgsrc = data[j].img_src;
+         var tmpInfo = data[j].info;
+
+         data[j].name = data[j + 1].name;
+         data[j].img_src = data[j + 1].img_src;
+         data[j].visited = data[j + 1].visited;
+         data[j].igrac = data[j + 1].igrac;
+         data[j].id = data[j + 1].id;
+         data[j].info = data[j + 1].info;
+
+
+         data[j + 1].name = tmpName;
+         data[j + 1].img_src = tmpImgsrc;
+         data[j + 1].igrac = tmpIgrac;
+         data[j + 1].info = tmpInfo;
+         data[j + 1].visited = tmpVisited;
+         data[j + 1].id = tmpId;
+       }
+   }
+   k--;
+ }
+} 
+   
+      for(let i=0;i<data.length;i++) { %>
+        <tr>
+          <td><%= data[i].name %></td>
+          <td><%= data[i].visited %></td>
+        </tr>
+        <% } %>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-4">
+      <p>Fudbaler sa najviše glasova: </p>
+      <div class="row">
+        <img id="myFrame" src="./images/messi.jpg" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
